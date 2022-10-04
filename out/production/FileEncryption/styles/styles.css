@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    -primary: #131313;
+    -light: #f9f9f9;
+    -light-accent: #dfdfdf;
+}
+
+.root {
+    -fx-font-family: "Inter";
+    -fx-font-size: 16px;
+    -fx-background-color: -light;
+    -fx-font-smoothing-type: gray;
+    -fx-text-fill: -primary;
+}
+
+.heading {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -primary;
+}
+
+.radio-button .radio {
+    -fx-background-color: -light-accent;
+    -fx-padding: 3px;
+}
+
+.radio-button .dot {
+    -fx-padding: 5px;
+}
+
+.button {
+    -fx-background-color: -light-accent, linear-gradient(-light-accent 10%, white 90%);
+    -fx-border-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-border-color: -light-accent;
+    -fx-text-fill: -primary;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 2, 0.0, 0, 0.1);
+    -fx-cursor: hand;
+}
+
+.button:hover, .text-field:hover {
+    -fx-border-color: rgba(81, 81, 81, 0.3);
+    -fx-background-color: -light-accent, linear-gradient(-light-accent 50%, white 100%);
+}
+
+.text-field {
+    -fx-border-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-border-color: -light-accent;
+    -fx-background-color: -light-accent, linear-gradient(-light-accent 5%, white 90%);
+    -fx-text-fill: -primary;
+    -fx-max-width: 200px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 2, 0.0, 0, 0.1);
+    -fx-prompt-text-fill: -primary;
+}
+
+.check-box {
+    -fx-font-size: 14px;
+}
+
+.check-box .mark {
+    -fx-padding: 4px;
+}
+
+.check-box .box {
+    -fx-background-color: -light;
+    -fx-border-color: -primary;
+    -fx-border-radius: 2px;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -light;
+}
+
+.check-box:selected .box {
+    -fx-background-color: -primary;
+}
+
+.anchor {
+    -fx-border-color: transparent;
+    -fx-underline: false;
+    -fx-text-fill: -primary;
+    -fx-font-weight: bold;
+}
+
+.anchor:hover {
+    -fx-text-fill: -primary;
+}
+
+.footer {
+    -fx-background-color: -light-accent;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}

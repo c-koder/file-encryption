@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../styles/styles.css"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.Controller">
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label styleClass="heading" textAlignment="CENTER">
+                File Encryption v1.0
+            </Label>
+
+            <Line endX="150" opacity="0.5" stroke="black"/>
+
+            <Label textAlignment="CENTER" style="-fx-font-weight: bold;">
+                Choose Mode
+            </Label>
+
+            <HBox alignment="CENTER" spacing="10">
+                <padding>
+                    <Insets top="6" bottom="10"/>
+                </padding>
+                <fx:define>
+                    <ToggleGroup fx:id="modeGroup"/>
+                </fx:define>
+                <RadioButton text="Encrypt" toggleGroup="$modeGroup" selected="true"/>
+                <RadioButton text="Decrypt" toggleGroup="$modeGroup"/>
+            </HBox>
+
+            <VBox spacing="10" fx:id="fileFolderVBox" alignment="CENTER">
+                <Label fx:id="locationLabel" style="-fx-font-size: 14px;"/>
+                <Label fx:id="fileFolderDetailsLabel"
+                       style="-fx-font-size: 14px; -fx-wrap-text: true; -fx-font-weight: bold; -fx-text-alignment: center; -fx-max-width: 300px;"/>
+            </VBox>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Button onAction="#handleSelectFile">
+                    File
+                </Button>
+                <Button onAction="#handleSelectFolder">
+                    Folder
+                </Button>
+                <Button onAction="#handleReset">
+                    Reset
+                </Button>
+                <padding>
+                    <Insets bottom="10"/>
+                </padding>
+            </HBox>
+
+            <Line endX="150" opacity="0.5" stroke="black"/>
+
+            <Label textAlignment="CENTER" style="-fx-font-size: 14px; -fx-max-width: 300px; -fx-wrap-text: true">
+                <padding>
+                    <Insets top="6"/>
+                </padding>
+                Provide a secure key to use as an auth token when encrypting/decrypting.
+            </Label>
+
+            <PasswordField promptText="Your secret key" fx:id="keyField"/>
+
+            <CheckBox fx:id="overwriteCheckBox" text="Overwrite files?" selected="true"/>
+
+            <HBox alignment="CENTER" spacing="15">
+                <padding>
+                    <Insets top="6"/>
+                </padding>
+                <Button onAction="#handleSpecifyOutputPath" fx:id="outputPathBtn">
+                    Output Path
+                </Button>
+                <Button onAction="#handleEncryptOrDecrypt" fx:id="beginBtn">
+                    Begin
+                </Button>
+            </HBox>
+
+            <VBox spacing="10" alignment="CENTER">
+                <Label fx:id="outputLocationLabel" style="-fx-font-size: 14px;"/>
+                <Label fx:id="statusLabel"
+                       style="-fx-font-size: 14px; -fx-wrap-text: true; -fx-font-weight: bold; -fx-text-alignment: center; -fx-max-width: 300px;"/>
+            </VBox>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox alignment="CENTER" styleClass="footer">
+            <Hyperlink styleClass="anchor" textAlignment="CENTER">
+                Made with ♥ by DLX
+            </Hyperlink>
+        </VBox>
+    </bottom>
+</BorderPane>
