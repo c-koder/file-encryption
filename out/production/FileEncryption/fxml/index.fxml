@@ -76,14 +76,9 @@
             </HBox>
 
             <VBox spacing="10" alignment="CENTER">
-                <padding>
-                    <Insets top="6"/>
-                </padding>
                 <Label fx:id="outputLocationLabel" style="-fx-font-size: 14px;"/>
                 <Label fx:id="statusLabel"
-                       style="-fx-font-size: 14px; -fx-wrap-text: true; -fx-font-weight: bold; -fx-text-alignment: center;"/>
-                <Label fx:id="timeElapsedLabel"
-                       style="-fx-font-size: 14px; -fx-wrap-text: true; -fx-text-alignment: center;"/>
+                       style="-fx-font-size: 14px; -fx-wrap-text: true; -fx-font-weight: bold; -fx-text-alignment: center; -fx-max-width: 300px;"/>
             </VBox>
         </VBox>
     </center>
