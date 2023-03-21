@@ -89,9 +89,7 @@
     </center>
     <bottom>
         <VBox alignment="CENTER" styleClass="footer">
-            <Hyperlink styleClass="anchor" textAlignment="CENTER">
-                Made with ♥ by DLX
-            </Hyperlink>
+            <Hyperlink styleClass="anchor" textAlignment="CENTER" text="Made with ♥ by ckoder&#xD;Still under development."/>
         </VBox>
     </bottom>
 </BorderPane>

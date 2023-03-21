@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -54,9 +55,9 @@ public class Controller {
     private int completedCount = 0;
 
     private static boolean beginEncryptOrDecrypt(int cipherMode, String key, File inputFile,
-                                                 File outputFile) {
+            File outputFile) {
         try {
-            byte[] decodedKey = Base64.getDecoder().decode(key);
+            byte[] decodedKey = key.getBytes(StandardCharsets.UTF_8);
             SecretKey secretKey = new SecretKeySpec(Arrays.copyOf(decodedKey, 16), "AES");
 
             Cipher cipher = Cipher.getInstance("AES");
@@ -92,7 +93,8 @@ public class Controller {
     @FXML
     public void initialize() {
         mode = (RadioButton) modeGroup.getSelectedToggle();
-        modeGroup.selectedToggleProperty().addListener((o, ov, nv) -> mode = (RadioButton) modeGroup.getSelectedToggle());
+        modeGroup.selectedToggleProperty()
+                .addListener((o, ov, nv) -> mode = (RadioButton) modeGroup.getSelectedToggle());
 
         fileFolderVBox.setManaged(false);
         fileFolderVBox.setVisible(false);
@@ -123,8 +125,8 @@ public class Controller {
             outputPathBtn.setDisable(nv);
         });
 
-        keyField.textProperty().addListener((o, ov, nv) ->
-                beginBtn.setDisable(nv.isEmpty() || files.isEmpty() || (!overwriteCheckBox.isSelected() && outputLocation == null)));
+        keyField.textProperty().addListener((o, ov, nv) -> beginBtn.setDisable(
+                nv.isEmpty() || files.isEmpty() || (!overwriteCheckBox.isSelected() && outputLocation == null)));
 
         files = new ArrayList<>();
     }
@@ -153,7 +155,8 @@ public class Controller {
             fileFolderVBox.setVisible(true);
             listAllFiles(chosenFileOrFolder.getPath());
             locationLabel.setText("Folder chosen: ");
-            fileFolderDetailsLabel.setText(chosenFileOrFolder.getAbsolutePath() + "\n" + fileCount + " File(s) and " + folderCount + " Folder(s)");
+            fileFolderDetailsLabel.setText(chosenFileOrFolder.getAbsolutePath() + "\n" + fileCount + " File(s) and "
+                    + folderCount + " Folder(s)");
         }
     }
 
@@ -203,6 +206,7 @@ public class Controller {
 
     @FXML
     private void handleEncryptOrDecrypt() {
+
         String key = keyField.getText();
 
         statusLabel.setManaged(true);
@@ -211,18 +215,21 @@ public class Controller {
         Task<Void> task = new Task<>() {
             @Override
             public Void call() {
-                int temp = fileCount;
+                int temp = fileCount == 0 ? 1 : fileCount;
                 long startTime = System.nanoTime();
 
-
                 for (File f : files) {
+
                     File o = f;
                     if (outputLocation != null && files.size() > 1) {
-                        o = new File(f.getPath().replace(chosenFileOrFolder.getAbsolutePath(), outputLocation.getAbsolutePath()));
+                        o = new File(f.getPath().replace(chosenFileOrFolder.getAbsolutePath(),
+                                outputLocation.getAbsolutePath()));
                     }
                     if (beginEncryptOrDecrypt(mode.getText().equals("Encrypt") ? 1 : 2, key, f, o)) {
                         completedCount++;
-                        Platform.runLater(() -> statusLabel.setText(completedCount + " of " + temp + " (" + (completedCount * 100 / temp) + "%)" + " File(s) " + (mode.getText().equals("Encrypt") ? "Encrypted" : "Decrypted")));
+                        Platform.runLater(() -> statusLabel.setText(completedCount + " of " + temp + " ("
+                                + (completedCount * 100 / temp) + "%)" + " File(s) "
+                                + (mode.getText().equals("Encrypt") ? "Encrypted" : "Decrypted")));
                     }
                 }
 
